@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#670626">
+    <meta name="description" content="Placar do interclasse de vôlei de praia do Colégio Sinerge.">
+    <title>Interclasse Sinerge · Vôlei de praia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="Interclasse Sinerge, início">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span><strong>SINERGE</strong><small>INTERCLASSE · VÔLEI DE PRAIA</small></span>
+        </a>
+        <span class="header-season"><span class="live-dot"></span> TEMPORADA ESCOLAR</span>
+      </header>
+
+      <main>
+        <section class="welcome">
+          <div class="welcome-copy">
+            <p class="eyebrow">AREIA, TIME E ESPÍRITO ESPORTIVO</p>
+            <h1>Seja Bem-Vindo(a) ao interclasse do colégio sinerge, <em>pronto(a) para começar o jogo?</em></h1>
+            <p class="welcome-note">Um ponto de cada vez. Registre a partida, acompanhe a evolução das equipes e celebre cada jogada.</p>
+          </div>
+          <div class="welcome-stamp" aria-hidden="true">
+            <span>JOGUE</span><span class="stamp-ball">✳</span><span>JUNTO</span>
+          </div>
+        </section>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+          <button class="nav-link active" type="button" data-view="scoreboard">Placar</button>
+          <button class="nav-link" type="button" data-view="sets">Estrutura de sets</button>
+          <button class="nav-link" type="button" data-view="points">Pontuação</button>
+          <button class="nav-link" type="button" data-view="rotation">Sistema de rotação</button>
+          <button class="nav-link" type="button" data-view="standings">Classificação</button>
+        </nav>
+
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+        <section class="view active" id="view-scoreboard" aria-labelledby="scoreboard-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">QUADRA 01 · PRAIA</p><h2 id="scoreboard-title">Placar da partida</h2></div>
+            <span class="status-pill" id="match-status">PREPARE A PARTIDA</span>
+          </div>
+
+          <div class="setup-card" id="setup-card">
+            <div class="card-heading"><div><span class="step-number">01</span><h3>Monte as equipes</h3></div><p>Quatro titulares em quadra e reservas opcionais por equipe.</p></div>
+            <form id="setup-form">
+              <div class="team-setup-grid">
+                <fieldset class="team-fieldset team-a-field">
+                  <legend>TIME A <span class="team-color-dot"></span></legend>
+                  <label>Nome da equipe<input name="teamA" maxlength="32" placeholder="Ex.: Marés do Sinerge" required></label>
+                  <div class="player-fields">
+                    <label>Posição 1 · Fundo direito · saque<input name="playerA1" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 2 · Frente direita<input name="playerA2" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 3 · Frente esquerda<input name="playerA3" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 4 · Fundo esquerdo<input name="playerA4" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                  </div>
+                  <div class="reserve-inputs" id="reserve-inputs-A"></div>
+                  <button class="add-reserve" type="button" data-add-reserve="A">＋ Adicionar reserva</button>
+                </fieldset>
+                <div class="versus" aria-hidden="true">VS</div>
+                <fieldset class="team-fieldset team-b-field">
+                  <legend>TIME B <span class="team-color-dot"></span></legend>
+                  <label>Nome da equipe<input name="teamB" maxlength="32" placeholder="Ex.: Guardiões da Areia" required></label>
+                  <div class="player-fields">
+                    <label>Posição 1 · Fundo direito · saque<input name="playerB1" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 2 · Frente direita<input name="playerB2" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 3 · Frente esquerda<input name="playerB3" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                    <label>Posição 4 · Fundo esquerdo<input name="playerB4" maxlength="32" placeholder="Nome do(a) atleta" required></label>
+                  </div>
+                  <div class="reserve-inputs" id="reserve-inputs-B"></div>
+                  <button class="add-reserve" type="button" data-add-reserve="B">＋ Adicionar reserva</button>
+                </fieldset>
+              </div>
+              <div class="setup-footer">
+                <label class="inline-select">Primeiro saque
+                  <select name="firstServe"><option value="A">Time A</option><option value="B">Time B</option></select>
+                </label>
+                <label class="inline-select">Formato da partida
+                  <select name="bestOf"><option value="3">Melhor de 3 sets</option><option value="5">Melhor de 5 sets</option></select>
+                </label>
+                <button class="button button-primary" type="submit">Começar partida <span aria-hidden="true">→</span></button>
+              </div>
+            </form>
+          </div>
+
+          <div class="match-card" id="match-card" hidden>
+            <div class="match-meta"><span id="set-label">SET 1</span><span class="serve-label" id="serve-label">SAQUE: TIME A</span><span id="match-format"></span></div>
+            <div class="scoreboard">
+              <article class="score-team score-team-a">
+                <div class="team-topline"><span class="team-label">TIME A</span><span class="serve-indicator" id="serve-indicator-a"></span></div>
+                <h3 id="score-name-a"></h3>
+                <div class="score-value" id="score-a">0</div>
+                <div class="set-wins" id="sets-a"></div>
+                <div class="score-actions">
+                  <label class="sr-only" for="point-player-a">Atleta que marcou para o time A</label>
+                  <select id="point-player-a" aria-label="Atleta que marcou para o time A"></select>
+                  <button type="button" class="point-button" data-point="A" aria-label="Adicionar ponto ao time A">+ PONTO</button>
+                </div>
+                <div class="roster-line" id="roster-a"></div>
+                <div class="substitution-panel" id="substitution-a"></div>
+              </article>
+              <div class="score-divider"><span>×</span><small>AREIA</small></div>
+              <article class="score-team score-team-b">
+                <div class="team-topline"><span class="team-label">TIME B</span><span class="serve-indicator" id="serve-indicator-b"></span></div>
+                <h3 id="score-name-b"></h3>
+                <div class="score-value" id="score-b">0</div>
+                <div class="set-wins" id="sets-b"></div>
+                <div class="score-actions">
+                  <label class="sr-only" for="point-player-b">Atleta que marcou para o time B</label>
+                  <select id="point-player-b" aria-label="Atleta que marcou para o time B"></select>
+                  <button type="button" class="point-button" data-point="B" aria-label="Adicionar ponto ao time B">+ PONTO</button>
+                </div>
+                <div class="roster-line" id="roster-b"></div>
+                <div class="substitution-panel" id="substitution-b"></div>
+              </article>
+            </div>
+            <div class="match-toolbar">
+              <p><span class="live-dot"></span> <span id="toolbar-match-status">Partida em andamento</span><span id="last-action"></span></p>
+              <div class="toolbar-actions">
+                <button class="button button-light" id="undo-point" type="button">↶ Desfazer ponto</button>
+                <button class="button button-light" id="save-match" type="button">Salvar placar</button>
+                <button class="button button-primary" id="new-match" type="button" hidden>Nova partida</button>
+                <button class="button button-danger" id="delete-match" type="button">Apagar partida</button>
+              </div>
+            </div>
+          </div>
+          <div class="empty-state" id="empty-state"><span class="empty-icon" aria-hidden="true">✳</span><p>Preencha as equipes acima para montar o placar da quadra.</p></div>
+
+          <div class="bottom-grid">
+            <section class="info-card" aria-labelledby="sets-preview-title">
+              <div class="card-heading compact"><div><span class="mini-icon">01</span><h3 id="sets-preview-title">Sets da partida</h3></div><button class="text-link" type="button" data-view="sets">Ver regras →</button></div>
+              <div id="set-summary" class="set-summary"><p>Os resultados de cada set aparecem aqui.</p></div>
+            </section>
+            <section class="info-card" aria-labelledby="activity-title">
+              <div class="card-heading compact"><div><span class="mini-icon">↗</span><h3 id="activity-title">Destaques das equipes</h3></div><button class="text-link" type="button" data-view="points">Ver estatísticas →</button></div>
+              <div id="player-highlights" class="player-highlights"><p>As estatísticas individuais começam junto com a partida.</p></div>
+            </section>
+          </div>
+          <section class="history-card" aria-labelledby="history-title">
+            <div class="card-heading compact"><div><span class="mini-icon">↺</span><h3 id="history-title">Partidas salvas</h3></div><span class="small-note">Guardadas neste dispositivo</span></div>
+            <div id="match-history" class="history-list"><p>Nenhum placar salvo ainda.</p></div>
+          </section>
+        </section>
+
+        <section class="view info-view" id="view-sets" aria-labelledby="sets-title" hidden>
+          <div class="section-heading"><div><p class="eyebrow">COMO A PARTIDA É DEFINIDA</p><h2 id="sets-title">Estrutura de sets</h2></div><span class="status-pill">REGRAS DA AREIA</span></div>
+          <div class="rule-grid">
+            <article class="rule-card featured-rule"><span class="rule-number">01</span><h3>Melhor de 3 sets</h3><p>A equipe que vencer dois sets primeiro ganha a partida. O formato de 5 sets também pode ser escolhido antes do início.</p></article>
+            <article class="rule-card"><span class="rule-number">02</span><h3>Sets antes do decisivo: 21 pontos</h3><p>Os sets antes do set decisivo vão até 21 pontos. É preciso abrir dois pontos de vantagem para fechar o set.</p></article>
+            <article class="rule-card"><span class="rule-number">03</span><h3>Set decisivo: 15 pontos</h3><p>Se houver empate em sets, o último set é disputado até 15 pontos, também com diferença mínima de dois.</p></article>
+            <article class="rule-card"><span class="rule-number">04</span><h3>Sem limite de pontos</h3><p>Se o placar empatar no ponto de fechamento, a partida continua até uma equipe alcançar a vantagem necessária.</p></article>
+          </div>
+          <div class="callout"><span>✳</span><p>O placar destaca automaticamente a equipe vencedora e registra o resultado de cada set ao fim da partida.</p></div>
+        </section>
+
+        <section class="view info-view" id="view-points" aria-labelledby="points-title" hidden>
+          <div class="section-heading"><div><p class="eyebrow">CADA JOGADA CONTA</p><h2 id="points-title">Pontuação e desempenho</h2></div><span class="status-pill">ESTATÍSTICAS DA PARTIDA</span></div>
+          <div class="stats-explainer">
+            <div class="stats-copy"><span class="rule-number">01</span><h3>O placar é coletivo.<br><em>O destaque também pode ser individual.</em></h3><p>Ao marcar um ponto, selecione quem finalizou a jogada entre os quatro atletas em quadra. Registre erros e boas contribuições de todo o elenco, inclusive das reservas.</p></div>
+            <div class="stats-list">
+              <div><span class="stat-symbol point-symbol">+</span><p><strong>Pontos</strong><small>Ralis vencidos atribuídos ao atleta selecionado.</small></p></div>
+              <div><span class="stat-symbol error-symbol">!</span><p><strong>Erros</strong><small>Saque na rede ou para fora, ataque errado ou outra falha.</small></p></div>
+              <div><span class="stat-symbol assist-symbol">✳</span><p><strong>Boas contribuições</strong><small>Recepção, defesa, levantamento ou cobertura decisiva.</small></p></div>
+            </div>
+          </div>
+          <div class="info-card stat-controls-card">
+            <div class="card-heading compact"><div><span class="mini-icon">↗</span><h3>Registrar desempenho</h3></div><span class="small-note" id="stats-match-caption">Inicie uma partida para registrar ações.</span></div>
+            <div id="stat-controls" class="stat-controls"><p>Os controles individuais ficam disponíveis durante uma partida.</p></div>
+          </div>
+          <div class="info-card"><div class="card-heading compact"><div><span class="mini-icon">◎</span><h3>Estatísticas individuais</h3></div></div><div id="stats-table-wrap"><p class="empty-copy">A tabela de desempenho será preenchida durante o jogo.</p></div></div>
+        </section>
+
+        <section class="view info-view" id="view-rotation" aria-labelledby="rotation-title" hidden>
+          <div class="section-heading"><div><p class="eyebrow">POSIÇÃO, SAQUE E COBERTURA</p><h2 id="rotation-title">Revezamento e rotação</h2></div><span class="status-pill">QUATRO EM QUADRA</span></div>
+          <div class="rotation-layout">
+            <div class="court-card">
+              <div class="court-label"><span id="court-team-label">POSIÇÕES INICIAIS</span><span>REDE</span></div>
+              <div class="court">
+                <div class="net-line"></div>
+                <div class="court-position court-p3" id="court-p3"><small>POSIÇÃO 3 · FRENTE ESQUERDA</small><strong>Jogador(a) 3</strong></div>
+                <div class="court-position court-p2" id="court-p2"><small>POSIÇÃO 2 · FRENTE DIREITA</small><strong>Jogador(a) 2</strong></div>
+                <div class="court-position court-p4" id="court-p4"><small>POSIÇÃO 4 · FUNDO ESQUERDO</small><strong>Jogador(a) 4</strong></div>
+                <div class="court-position court-p1" id="court-p1"><small>POSIÇÃO 1 · FUNDO DIREITO · SAQUE</small><strong>Jogador(a) 1</strong></div>
+              </div>
+              <p class="court-footnote">A posição 1 inicia o saque. Quando a equipe recupera o serviço, os quatro jogadores giram uma posição; as substituições entram no lugar do atleta escolhido.</p>
+            </div>
+            <div class="rotation-copy">
+              <span class="rule-number">01</span><h3>Quatro em quadra.<br><em>Revezamento combinado.</em></h3>
+              <p>Esta tabela segue o formato de quatro contra quatro solicitado para o interclasse. O giro acompanha a rotação simplificada de quatro posições; confirme as regras da atividade com a organização.</p>
+              <ol class="rotation-steps"><li><span>1</span> Definam os quatro titulares nas posições 1 a 4 antes da partida.</li><li><span>2</span> Ao recuperar o saque, a equipe roda uma posição e o novo atleta da posição 1 saca.</li><li><span>3</span> Para revezar, escolham quem sai e qual reserva entra nessa posição.</li></ol>
+              <div class="serve-order"><strong>Revezamentos realizados</strong><div id="substitution-history"><p>Inicie uma partida para acompanhar as trocas.</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view info-view" id="view-standings" aria-labelledby="standings-title" hidden>
+          <div class="section-heading"><div><p class="eyebrow">O PÓDIO DO INTERCLASSE</p><h2 id="standings-title">Classificação</h2></div><span class="status-pill">RESULTADOS SALVOS</span></div>
+          <div class="podium" id="podium"></div>
+          <section class="info-card standings-card">
+            <div class="card-heading compact"><div><span class="mini-icon">↗</span><h3>Resultados das partidas</h3></div><span class="small-note">Vencedores e placares finais</span></div>
+            <div id="results-table-wrap"><p class="empty-copy">Finalize e salve partidas para montar a classificação.</p></div>
+          </section>
+          <p class="standings-note">A classificação é calculada pelas vitórias registradas neste dispositivo. Empates em vitórias são ordenados pelo saldo de sets e, depois, pelo saldo de pontos.</p>
+        </section>
+      </main>
+
+      <footer class="site-footer"><span>COLÉGIO SINERGE · INTERCLASSE</span><span>ESPÍRITO ESPORTIVO EM CADA PONTO <b>✳</b></span></footer>
+    </div>
+    <dialog id="confirm-dialog" class="confirm-dialog">
+      <form method="dialog"><p class="eyebrow">CONFIRMAR AÇÃO</p><h2 id="confirm-title">Apagar esta partida?</h2><p id="confirm-copy">O placar atual será removido deste dispositivo.</p><div class="dialog-actions"><button class="button button-light" value="cancel">Manter partida</button><button class="button button-danger" value="confirm">Apagar</button></div></form>
+    </dialog>
+  </body>
+</html>
